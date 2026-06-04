@@ -132,7 +132,7 @@ python scripts/publish_obsidian_payload.py obsidian_payload.json --vault /path/t
 
 ## Math Policy
 
-Keep normal Markdown/LaTeX syntax, such as `$K$` and `$$...$$`. Obsidian and common math plugins expect ordinary Markdown math, so do not convert inline math into Notion enhanced Markdown.
+Keep normal Markdown/LaTeX syntax, such as `$K$` and `$$...$$`. Obsidian and common math plugins expect ordinary Markdown math, so avoid provider-specific math conversions.
 
 ## Dedup Query
 

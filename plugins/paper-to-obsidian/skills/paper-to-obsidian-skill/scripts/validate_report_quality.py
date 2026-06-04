@@ -276,7 +276,6 @@ def main() -> int:
     parser.add_argument("--paper-type", action="append", help="Paper type; repeat for multiple values")
     parser.add_argument("--min-words", type=int, help="Override minimum report word count")
     parser.add_argument("--body-only", dest="body_only", action="store_true", help="Allow a page body without a top-level H1 title")
-    parser.add_argument("--notion-body", dest="body_only", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--arxiv-html-extract", type=Path, help="arxiv_html_extract.json with image_accessible flags")
     parser.add_argument("--check-image-urls", action="store_true", help="Check hosted Markdown image URLs over HTTP")
     parser.add_argument("--image-timeout", type=int, default=20, help="Per-image URL check timeout in seconds")

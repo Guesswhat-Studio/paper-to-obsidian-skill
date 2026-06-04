@@ -1,5 +1,4 @@
 .venv/
-.paper-notion/
 .paper-obsidian/
 __pycache__/
 *.pyc
@@ -10,6 +9,5 @@ dist/
 build/
 outputs/
 smoke-test/
-notion_payload.json
 obsidian_payload.json
 evidence-pack.html

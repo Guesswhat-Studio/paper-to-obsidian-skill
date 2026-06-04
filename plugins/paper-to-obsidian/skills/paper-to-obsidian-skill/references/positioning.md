@@ -2,15 +2,15 @@
 
 Use this reference when preparing public copy, comparing adjacent tools, or deciding future roadmap.
 
-## Adjacent Projects Reviewed
+## Adjacent Patterns Reviewed
 
-- `masa-med-ai/Codex-paper-summerize-to-notion`: Codex setup bundle for medical PDFs or PubMed papers, Notion database creation, GitHub image storage, and Japanese graphic abstracts.
-- `Piece-Of-Schmidt/PaperReader`: Python application that reads PDFs, summarizes with OpenAI models, creates audio summaries, optionally emails outputs, and optionally uploads summaries/abstracts to Notion.
-- `ncreighton/5dbcdb82-research-paper-writing-system-`: Notion template/system for organizing research sources, arguments, and writing workflow rather than an agentic paper-reading pipeline.
-- `Sparidae/paper-read-workflow`: Engineering-heavy paper tool with arXiv/OpenReview ingestion, PDF download, LaTeX source/image/table extraction, Notion pages, batch import, paper chat, Web UI, config checks, and database schema checks.
-- `dengzhe-hou/notion-research-flow`: Claude Code + Notion MCP workflow for daily arXiv discovery, 5D scoring, social-signal enrichment, conference tracking, team assignments, weekly digests, and multiple Notion views.
-- `hwang847/codex-paper-reader`: Codex skill for local paper folders, copied-title-to-PDF matching, source registry, interactive reading, screenshot rendering, preference capture, and concise HTML notes.
-- `CodeBuddy WorkBuddy Connector`: Runtime connector model for external services through `MCP + CLI` and `Skill + CLI`, including custom MCP connectors and user-scoped authorization boundaries.
+- Medical and PubMed-oriented paper readers that combine PDF parsing, metadata setup, image handling, and specialty summaries.
+- Standalone PDF summarizers that produce text, audio, email, or workspace exports.
+- Research writing systems focused on organizing sources, arguments, and writing workflows rather than agentic paper-reading execution.
+- Engineering-heavy paper tools with arXiv/OpenReview ingestion, PDF download, LaTeX source/image/table extraction, batch import, paper chat, Web UI, config checks, and schema checks.
+- Daily paper discovery workflows with scoring, conference tracking, team assignment, weekly digests, and multi-view triage.
+- Local-first Codex paper readers for paper folders, copied-title-to-PDF matching, source registry, interactive reading, screenshot rendering, preference capture, and concise HTML notes.
+- Runtime connector models for external services through `MCP + CLI` and `Skill + CLI`, including custom MCP connectors and user-scoped authorization boundaries.
 
 ## Current Strengths
 

@@ -39,15 +39,16 @@ jobs:
       - name: Validate repository packaging
         run: python tools/validate_repository.py
 
-      - name: Validate Notion schema
+      - name: Validate Obsidian schema
         run: python scripts/schema_tool.py --command validate
 
       - name: Check helper CLIs
         run: |
           python scripts/fetch_arxiv_html.py --help
-          python scripts/build_notion_payload.py --help
-          python scripts/validate_notion_payload.py --help
-          python scripts/publish_notion_payload.py --help
+          python scripts/build_obsidian_payload.py --help
+          python scripts/validate_report_quality.py --help
+          python scripts/validate_obsidian_payload.py --help
+          python scripts/publish_obsidian_payload.py --help
 
   network-smoke:
     name: arXiv network smoke
@@ -66,4 +67,4 @@ jobs:
         run: python -m pip install --upgrade pip && python -m pip install -r requirements.txt
 
       - name: Fetch arXiv HTML reading pack
-        run: python scripts/fetch_arxiv_html.py 1706.03762 --output .paper-notion/arxiv-html-ci --limit 3
+        run: python scripts/fetch_arxiv_html.py 1706.03762 --output .paper-obsidian/arxiv-html-ci --limit 3
