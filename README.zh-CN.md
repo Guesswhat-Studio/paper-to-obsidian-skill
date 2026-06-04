@@ -114,7 +114,7 @@ Vault path: <我的 Obsidian vault 绝对路径>
 
 兼容 plugin 的用户可以添加同一个 GitHub 仓库作为 marketplace，然后从 `guesswhat-paper-tools` 安装 `Paper To Obsidian`。
 
-如果仓库是 private，安装者需要拥有 `Guesswhat-Studio/paper-to-obsidian-skill` 的访问权限。这个仓库的 marketplace 和 plugin 结构遵循 Claude Code plugin 文档：
+这个仓库的 marketplace 和 plugin 结构遵循 Claude Code plugin 文档：
 
 - [Discover and install plugins](https://code.claude.com/docs/en/discover-plugins)
 - [Create and distribute plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)

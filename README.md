@@ -114,7 +114,7 @@ Vault path: <absolute path to my Obsidian vault>
 
 Compatible plugin users can add the same GitHub repository as a plugin marketplace, then install `Paper To Obsidian` from `guesswhat-paper-tools`.
 
-For private repository installs, the user must already have GitHub access to `Guesswhat-Studio/paper-to-obsidian-skill`. The marketplace and plugin structure in this repo follows the Claude Code plugin docs:
+The marketplace and plugin structure in this repo follows the Claude Code plugin docs:
 
 - [Discover and install plugins](https://code.claude.com/docs/en/discover-plugins)
 - [Create and distribute plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
