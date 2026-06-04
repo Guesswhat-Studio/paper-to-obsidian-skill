@@ -64,8 +64,11 @@ def validate_manifests(errors: list[str]) -> None:
         paper_plugin = next((item for item in plugins if isinstance(item, dict) and item.get("name") == "paper-to-obsidian"), None)
         if paper_plugin is None:
             errors.append("Marketplace must include paper-to-obsidian")
-        elif paper_plugin.get("source") != "./plugins/paper-to-obsidian":
-            errors.append("paper-to-obsidian marketplace source must be ./plugins/paper-to-obsidian")
+        else:
+            if paper_plugin.get("version") != EXPECTED_PLUGIN_VERSION:
+                errors.append(f"paper-to-obsidian marketplace version must be {EXPECTED_PLUGIN_VERSION}")
+            if paper_plugin.get("source") != "./plugins/paper-to-obsidian":
+                errors.append("paper-to-obsidian marketplace source must be ./plugins/paper-to-obsidian")
 
     if plugin.get("name") != "paper-to-obsidian":
         errors.append("plugins/paper-to-obsidian/.claude-plugin/plugin.json name must be paper-to-obsidian")

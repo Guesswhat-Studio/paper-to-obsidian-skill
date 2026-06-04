@@ -8,6 +8,7 @@
   "plugins": [
     {
       "name": "paper-to-obsidian",
+      "version": "0.2.0",
       "source": "./plugins/paper-to-obsidian",
       "description": "Evidence-driven paper reading and Obsidian publishing workflow for Claude Code."
     }
