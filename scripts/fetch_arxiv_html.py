@@ -75,7 +75,7 @@ def check_image_url(
     if not url:
         return False, None, "", ""
 
-    headers = {"User-Agent": "paper-to-obsidian-skill/0.1"}
+    headers = {"User-Agent": "paper-to-obsidian-skill/0.2"}
     try:
         response = session.head(url, allow_redirects=True, timeout=timeout, headers=headers)
         if response.status_code in {403, 405}:
@@ -263,7 +263,7 @@ def main() -> int:
 
     arxiv_id = normalize_arxiv_id(args.paper)
     url = html_url(arxiv_id)
-    response = requests.get(url, timeout=60, headers={"User-Agent": "paper-to-obsidian-skill/0.1"})
+    response = requests.get(url, timeout=60, headers={"User-Agent": "paper-to-obsidian-skill/0.2"})
     if response.status_code == 404:
         raise RuntimeError(f"arXiv HTML rendering is unavailable for {arxiv_id}: {url}")
     response.raise_for_status()

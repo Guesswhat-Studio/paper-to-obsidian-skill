@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN_ROOT = ROOT / "plugins" / "paper-to-obsidian"
 PLUGIN_SKILL = PLUGIN_ROOT / "skills" / "paper-to-obsidian-skill"
+EXPECTED_PLUGIN_VERSION = "0.2.0"
 
 
 def rel(path: Path) -> str:
@@ -68,6 +69,8 @@ def validate_manifests(errors: list[str]) -> None:
 
     if plugin.get("name") != "paper-to-obsidian":
         errors.append("plugins/paper-to-obsidian/.claude-plugin/plugin.json name must be paper-to-obsidian")
+    if plugin.get("version") != EXPECTED_PLUGIN_VERSION:
+        errors.append(f"plugins/paper-to-obsidian/.claude-plugin/plugin.json version must be {EXPECTED_PLUGIN_VERSION}")
     if plugin.get("license") != "MIT":
         errors.append("plugins/paper-to-obsidian/.claude-plugin/plugin.json license must be MIT")
 

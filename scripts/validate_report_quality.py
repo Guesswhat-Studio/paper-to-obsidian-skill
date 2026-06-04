@@ -95,7 +95,7 @@ def remote_image_ok(link: str, timeout: int) -> tuple[bool, int | None, str, str
     except ImportError as exc:
         raise SystemExit("requests is required for --check-image-urls") from exc
 
-    headers = {"User-Agent": "paper-to-obsidian-skill/0.1"}
+    headers = {"User-Agent": "paper-to-obsidian-skill/0.2"}
     try:
         response = requests.head(link, allow_redirects=True, timeout=timeout, headers=headers)
         if response.status_code in {403, 405}:

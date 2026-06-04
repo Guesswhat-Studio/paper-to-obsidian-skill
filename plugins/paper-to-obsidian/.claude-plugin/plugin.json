@@ -1,6 +1,6 @@
 {
   "name": "paper-to-obsidian",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Read academic papers with source-grounded evidence and publish rich reports to an Obsidian vault.",
   "author": {
     "name": "Guesswhat Studio",
