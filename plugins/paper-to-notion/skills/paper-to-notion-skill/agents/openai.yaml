@@ -1,4 +1,0 @@
-interface:
-  display_name: "Paper to Notion"
-  short_description: "Read papers deeply and publish to Notion"
-  default_prompt: "Use $paper-to-notion-skill to read this paper in English and save the report to my Notion paper database."

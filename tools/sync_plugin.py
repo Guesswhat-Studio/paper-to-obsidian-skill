@@ -5,7 +5,7 @@ The repository ships one skill to two runtimes:
 
 - the top-level tree (``SKILL.md``, ``scripts/``, ``references/`` ...) is the
   source of truth used by Codex and generic skill installs;
-- ``plugins/paper-to-notion/skills/paper-to-notion-skill/`` is a byte-for-byte
+- ``plugins/paper-to-obsidian/skills/paper-to-obsidian-skill/`` is a byte-for-byte
   copy that Claude Code's plugin loader auto-discovers.
 
 ``tools/validate_repository.py`` fails when the two drift apart. Run this script
@@ -25,8 +25,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLUGIN_ROOT = ROOT / "plugins" / "paper-to-notion"
-PLUGIN_SKILL = PLUGIN_ROOT / "skills" / "paper-to-notion-skill"
+PLUGIN_ROOT = ROOT / "plugins" / "paper-to-obsidian"
+PLUGIN_SKILL = PLUGIN_ROOT / "skills" / "paper-to-obsidian-skill"
 
 
 def mirror_pairs() -> list[tuple[Path, Path]]:
@@ -40,7 +40,7 @@ def mirror_pairs() -> list[tuple[Path, Path]]:
         (ROOT / "SKILL.md", PLUGIN_SKILL / "SKILL.md"),
         (ROOT / "requirements.txt", PLUGIN_SKILL / "requirements.txt"),
         (ROOT / "agents" / "openai.yaml", PLUGIN_SKILL / "agents" / "openai.yaml"),
-        (ROOT / "config" / "notion_schema.yaml", PLUGIN_SKILL / "config" / "notion_schema.yaml"),
+        (ROOT / "config" / "obsidian_schema.yaml", PLUGIN_SKILL / "config" / "obsidian_schema.yaml"),
     ]
     for path in sorted((ROOT / "references").glob("*.md")):
         pairs.append((path, PLUGIN_SKILL / "references" / path.name))
