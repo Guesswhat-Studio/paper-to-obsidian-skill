@@ -15,6 +15,7 @@ All `scripts/...` and `references/...` paths are relative to the skill root, the
 
 - **Claude plugin installs**: shell commands may run from the user's project directory, so prefix scripts with the skill root when needed.
 - **Codex or generic skill installs**: run commands from the skill directory when relative paths are convenient.
+- **Shell-sensitive commands**: detect the OS and active shell/tool before running setup commands. Use PowerShell syntax only in a PowerShell tool, and POSIX shell syntax only in Bash/zsh/sh. Do not paste PowerShell cmdlets such as `New-Item`, `Copy-Item`, or `.\scripts\bootstrap_uv.ps1` into Bash.
 
 Durable, user-owned setup state is written to the active workspace under `.paper-obsidian/`, never into the skill/plugin directory.
 
@@ -36,13 +37,16 @@ For arXiv HTML figures, official `https://arxiv.org/html/...` image URLs may be 
 
 ## Setup Layer
 
-1. Detect the runtime and local filesystem access. Obsidian does not require an MCP connector for the default workflow; the vault is a normal directory of Markdown files.
+1. Detect the runtime, OS, active shell/tool, and local filesystem access. Obsidian does not require an MCP connector for the default workflow; the vault is a normal directory of Markdown files.
+   - Record whether commands are being run in PowerShell, cmd.exe, Bash, zsh, sh, WSL, or another POSIX-like shell.
+   - Match command syntax to the active shell/tool, not only to the OS. On Windows, Bash-compatible tools still need POSIX syntax; PowerShell cmdlets still require a PowerShell tool.
+   - Prefer Python helper commands for cross-platform setup. `scripts/setup_environment.py` creates `.paper-obsidian/` paths as needed, so manual directory creation is usually unnecessary.
 2. Prepare and verify the local paper-reading environment.
    - Read `references/environment-setup.md`.
    - Check Python, required Python packages, optional OCR/tools, and network access.
    - Prefer a uv-managed virtual environment in the active workspace at `.paper-obsidian/.venv`.
    - If Python is already available, use `python scripts/setup_environment.py --use-uv --install`.
-   - If Python is missing, do not try to run Python scripts. Use the OS bootstrap script after the user approves uv/Python installation: `.\scripts\bootstrap_uv.ps1 -InstallUv` on Windows, or `INSTALL_UV=1 sh scripts/bootstrap_uv.sh` on macOS/Linux.
+   - If Python is missing, do not try to run Python scripts. Use the bootstrap script that matches the active shell after the user approves uv/Python installation: `.\scripts\bootstrap_uv.ps1 -InstallUv` in PowerShell, or `INSTALL_UV=1 sh scripts/bootstrap_uv.sh` in Bash/zsh/sh.
    - Run `python scripts/smoke_test_attention.py` after dependency setup when network access is available.
 3. Configure the vault.
    - Use `config/obsidian_schema.yaml` as the machine-readable frontmatter schema source.

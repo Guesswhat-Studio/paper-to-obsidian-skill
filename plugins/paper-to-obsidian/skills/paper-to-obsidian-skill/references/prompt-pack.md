@@ -8,6 +8,8 @@ These prompts are examples for users or future agents. The skill itself should f
 Use $paper-to-obsidian-skill to set up my Obsidian paper reading workflow.
 
 Please detect the OS, prepare a workspace uv-managed .venv at .paper-obsidian/.venv for PDF reading, validate the frontmatter schema, use this Obsidian vault path: <VAULT_PATH>, save .paper-obsidian/config.json in this workspace, run the Attention Is All You Need smoke test, then dry-run a publish into the vault.
+
+Before running shell commands, detect the active shell/tool and use matching syntax: PowerShell commands only in PowerShell, POSIX commands only in Bash/zsh/sh. Prefer the Python setup helper when Python is available.
 ```
 
 ## Environment-Only Prompt
@@ -16,6 +18,8 @@ Please detect the OS, prepare a workspace uv-managed .venv at .paper-obsidian/.v
 Use $paper-to-obsidian-skill to check and prepare my local paper-reading environment.
 
 Please detect Windows/macOS/Linux, create the workspace .venv at .paper-obsidian/.venv with uv if useful, install the required Python packages, validate PyMuPDF/Pillow/requests/HTML parsing support, report optional tool availability, and run the Attention Is All You Need smoke test if network access is available.
+
+Before running shell commands, detect the active shell/tool and use matching syntax: PowerShell commands only in PowerShell, POSIX commands only in Bash/zsh/sh. Prefer the Python setup helper when Python is available.
 ```
 
 ## Default English Reading Prompt

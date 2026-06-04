@@ -2,6 +2,29 @@
 
 Use this reference for local dependency setup and smoke testing.
 
+## Shell And OS Preflight
+
+Before running setup commands, detect both the operating system and the active shell/tool. The OS decides paths and bootstrap choices; the active shell decides command syntax.
+
+- Use PowerShell cmdlets such as `New-Item`, `Copy-Item`, and `.\scripts\bootstrap_uv.ps1` only in a PowerShell tool.
+- Use POSIX commands such as `mkdir -p`, `cp -R`, and `sh scripts/bootstrap_uv.sh` only in Bash, zsh, sh, WSL, or another POSIX-like shell.
+- If Claude Code or Codex exposes both Bash and PowerShell tools, choose the tool that matches the command block. Do not run PowerShell commands in Bash.
+- Prefer `python scripts/setup_environment.py ...` when Python is already available. It creates `.paper-obsidian/` and report directories as needed, so pre-creating the directory with shell-specific commands is usually unnecessary.
+
+Useful preflight checks:
+
+```bash
+uname -a
+python --version || python3 --version
+uv --version || true
+```
+
+```powershell
+$PSVersionTable.PSVersion
+python --version
+uv --version
+```
+
 ## Local State
 
 Prefer a uv-managed virtual environment in the active workspace under `.paper-obsidian/`:
@@ -32,9 +55,13 @@ python scripts/setup_environment.py --venv .paper-obsidian/.venv --install --jso
 
 If Python or uv needs bootstrapping and the user approves:
 
+PowerShell:
+
 ```powershell
 .\scripts\bootstrap_uv.ps1 -InstallUv
 ```
+
+Bash, zsh, sh, WSL, macOS, or Linux:
 
 ```bash
 INSTALL_UV=1 sh scripts/bootstrap_uv.sh

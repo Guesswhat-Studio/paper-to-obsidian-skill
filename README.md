@@ -24,7 +24,7 @@ Install it into my Codex skills directory, then use $paper-to-obsidian-skill to 
 
 Vault path: <absolute path to my Obsidian vault>
 
-Please handle the setup automatically: prepare the local Python environment, validate the Obsidian frontmatter schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take.
+Please handle the setup automatically: first detect my OS and active shell/tool, use commands that match that shell, prepare the local Python environment, validate the Obsidian frontmatter schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take.
 ```
 
 ### Option 2: Claude Code Plugin Install
@@ -54,13 +54,13 @@ From a terminal, use:
 ```bash
 claude plugin marketplace add https://github.com/Guesswhat-Studio/paper-to-obsidian-skill
 claude plugin install paper-to-obsidian@guesswhat-paper-tools
-claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
+claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: first detect my OS and active shell/tool, use commands that match that shell, prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
 ```
 
 As a one-liner:
 
 ```bash
-claude plugin marketplace add https://github.com/Guesswhat-Studio/paper-to-obsidian-skill && claude plugin install paper-to-obsidian@guesswhat-paper-tools && claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
+claude plugin marketplace add https://github.com/Guesswhat-Studio/paper-to-obsidian-skill && claude plugin install paper-to-obsidian@guesswhat-paper-tools && claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: first detect my OS and active shell/tool, use commands that match that shell, prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
 ```
 
 Claude chat on the web does not load Claude Code plugins directly. Use Claude Code, or plugin support in a compatible Claude workspace product.
@@ -234,6 +234,7 @@ The arXiv network smoke test is available through manual `workflow_dispatch` wit
 After installation, Codex or Claude should perform the remaining setup from the skill instructions:
 
 - Detect the runtime and available filesystem access.
+- Detect the operating system and active shell/tool before running shell commands.
 - Record the target Obsidian vault path.
 - Validate the default schema in `config/obsidian_schema.yaml`.
 - Prepare a workspace Python environment at `.paper-obsidian/.venv`.
@@ -248,6 +249,8 @@ If Python is already available, create a workspace virtual environment (`.paper-
 ```bash
 python scripts/setup_environment.py --use-uv --install --json-report .paper-obsidian/environment-check.json
 ```
+
+The Python setup helper creates `.paper-obsidian/` paths as needed. When shell-specific commands are required, use the command block that matches the active shell/tool: PowerShell snippets belong in PowerShell, while Bash snippets belong in Bash, zsh, sh, WSL, macOS, or Linux shells.
 
 If Python is not available yet, use the bootstrap script for your OS. These commands install or use the standalone `uv` binary first, then let uv install Python and create `.venv`.
 
@@ -357,7 +360,7 @@ Use $paper-to-obsidian-skill to set up my Obsidian paper reading workflow.
 
 Vault path: <absolute path to my Obsidian vault>
 
-Please detect my runtime, prepare the local Python environment, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and verify that a payload can be dry-run published to the vault.
+Please detect my runtime, OS, and active shell/tool, prepare the local Python environment using commands that match the shell, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and verify that a payload can be dry-run published to the vault.
 ```
 
 Common input routing is intentionally simple:

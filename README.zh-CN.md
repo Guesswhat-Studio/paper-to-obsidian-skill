@@ -24,7 +24,7 @@ https://github.com/Guesswhat-Studio/paper-to-obsidian-skill
 
 Vault path: <我的 Obsidian vault 绝对路径>
 
-请自动完成后续设置：准备本地 Python 环境，校验 Obsidian frontmatter schema，运行 Attention Is All You Need smoke test，保存 .paper-obsidian/config.json，最后只告诉我笔记路径、验证结果，以及还需要我手动处理的事项。
+请自动完成后续设置：先检测我的操作系统和当前 shell/tool，使用匹配该 shell 的命令，准备本地 Python 环境，校验 Obsidian frontmatter schema，运行 Attention Is All You Need smoke test，保存 .paper-obsidian/config.json，最后只告诉我笔记路径、验证结果，以及还需要我手动处理的事项。
 ```
 
 ### 方式 2：Claude Code Plugin 安装
@@ -54,13 +54,13 @@ Claude Code 的 plugin 命令由 Claude Code CLI 自己处理。模型在聊天�
 ```bash
 claude plugin marketplace add https://github.com/Guesswhat-Studio/paper-to-obsidian-skill
 claude plugin install paper-to-obsidian@guesswhat-paper-tools
-claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
+claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: first detect my OS and active shell/tool, use commands that match that shell, prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
 ```
 
 如果你更喜欢一条终端命令：
 
 ```bash
-claude plugin marketplace add https://github.com/Guesswhat-Studio/paper-to-obsidian-skill && claude plugin install paper-to-obsidian@guesswhat-paper-tools && claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
+claude plugin marketplace add https://github.com/Guesswhat-Studio/paper-to-obsidian-skill && claude plugin install paper-to-obsidian@guesswhat-paper-tools && claude -p "Use /paper-to-obsidian:paper-to-obsidian-skill to set up my Obsidian paper reading workflow. Vault path: <absolute path to my Obsidian vault>. Keep the setup automatic: first detect my OS and active shell/tool, use commands that match that shell, prepare the local Python environment, validate the schema, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and only report the note path, validation status, and any action I must take."
 ```
 
 Claude 网页聊天不会直接加载 Claude Code plugin。请使用 Claude Code，或支持 plugin 的兼容 Claude workspace 产品。
@@ -234,6 +234,7 @@ arXiv network smoke test 只在手动 `workflow_dispatch` 且设置 `run_network
 安装完成后，Codex 或 Claude 应该根据 `SKILL.md` 继续完成这些设置：
 
 - 检测当前 runtime 和本地文件系统访问能力。
+- 运行 shell 命令前检测操作系统和当前 shell/tool。
 - 记录目标 Obsidian vault 路径。
 - 校验 `config/obsidian_schema.yaml`。
 - 在工作目录准备 Python 环境（`.paper-obsidian/.venv`）。
@@ -248,6 +249,8 @@ arXiv network smoke test 只在手动 `workflow_dispatch` 且设置 `run_network
 ```bash
 python scripts/setup_environment.py --use-uv --install --json-report .paper-obsidian/environment-check.json
 ```
+
+Python setup helper 会按需创建 `.paper-obsidian/` 路径。需要运行 shell-specific 命令时，使用与当前 shell/tool 匹配的命令块：PowerShell 片段只在 PowerShell 里运行，Bash 片段只在 Bash、zsh、sh、WSL、macOS 或 Linux shell 里运行。
 
 如果本机还没有 Python，先走对应系统的 bootstrap 脚本。它们不需要预先有 Python：脚本会先安装或使用独立的 `uv` binary，再由 uv 安装 Python、创建 `.venv`、安装依赖。
 
@@ -357,7 +360,7 @@ Use $paper-to-obsidian-skill to set up my Obsidian paper reading workflow.
 
 Vault path: <我的 Obsidian vault 绝对路径>
 
-Please detect my runtime, prepare the local Python environment, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and verify that a payload can be dry-run published to the vault.
+Please detect my runtime, OS, and active shell/tool, prepare the local Python environment using commands that match the shell, run the Attention Is All You Need smoke test, save .paper-obsidian/config.json, and verify that a payload can be dry-run published to the vault.
 ```
 
 常见输入路由保持简单：
