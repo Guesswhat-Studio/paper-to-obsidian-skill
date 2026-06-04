@@ -39,7 +39,7 @@ properties:
     frontmatter: "venue"
     type: "LIST"
     required: false
-    purpose: "Venue labels."
+    purpose: "Venue labels. Options are suggestions, not a closed set."
     options:
       - { name: "arXiv" }
       - { name: "NeurIPS" }
@@ -63,7 +63,7 @@ properties:
     frontmatter: "field"
     type: "LIST"
     required: false
-    purpose: "Broad research area labels."
+    purpose: "Broad research area labels. Options are suggestions, not a closed set."
     options:
       - { name: "Machine Learning" }
       - { name: "Natural Language Processing" }
@@ -79,7 +79,7 @@ properties:
     frontmatter: "type"
     type: "LIST"
     required: false
-    purpose: "Paper or contribution type labels."
+    purpose: "Paper or contribution type labels. Options are suggestions, not a closed set."
     options:
       - { name: "method" }
       - { name: "survey" }

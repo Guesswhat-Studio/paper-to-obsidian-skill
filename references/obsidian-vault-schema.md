@@ -32,9 +32,9 @@ These are the default index fields:
 | `authors` | Author list as written in the paper. |
 | `publication_date` | Publication, arXiv, conference, or journal date when known. |
 | `year` | Numeric year for filtering and Dataview queries. |
-| `venue` | Venue labels. |
-| `field` | Broad research area labels. |
-| `type` | Paper or contribution type labels. |
+| `venue` | Venue labels. Open-ended list; schema options are suggestions. |
+| `field` | Broad research area labels. Open-ended list; schema options are suggestions. |
+| `type` | Paper or contribution type labels. Open-ended list; schema options are suggestions. |
 | `keywords` | Paper-specific topic phrases. |
 | `reading_status` | Workflow state. |
 | `read_date` | Date the report was written or last substantially updated. |

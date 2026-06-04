@@ -62,7 +62,9 @@ def option_names(prop: dict[str, Any] | None) -> set[str]:
 
 def filter_configured_options(field: str, values: list[str], prop: dict[str, Any] | None) -> list[str]:
     allowed = option_names(prop)
-    if not allowed:
+    prop_type = str((prop or {}).get("type", "")).strip().upper()
+    strict_options = bool((prop or {}).get("strict_options", False))
+    if not allowed or (prop_type == "LIST" and not strict_options):
         return values
     kept: list[str] = []
     skipped: list[str] = []
