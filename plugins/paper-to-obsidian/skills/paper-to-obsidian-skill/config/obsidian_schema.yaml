@@ -1,0 +1,172 @@
+schema_version: "1.0.0"
+vault:
+  notes_dir: "Papers"
+  attachments_dir: "Papers/assets"
+  default_language: "English"
+
+properties:
+  - name: "Name"
+    frontmatter: "title"
+    type: "TEXT"
+    required: true
+    purpose: "Display title. English by default."
+
+  - name: "Original Title"
+    frontmatter: "original_title"
+    type: "TEXT"
+    required: true
+    purpose: "Official paper title."
+
+  - name: "Authors"
+    frontmatter: "authors"
+    type: "TEXT"
+    required: true
+    purpose: "Author list as written in the paper."
+
+  - name: "Publication Date"
+    frontmatter: "publication_date"
+    type: "DATE"
+    required: false
+    purpose: "Publication, arXiv, conference, or journal date when known."
+
+  - name: "Year"
+    frontmatter: "year"
+    type: "NUMBER"
+    required: true
+    purpose: "Numeric year for filtering and Dataview queries."
+
+  - name: "Venue"
+    frontmatter: "venue"
+    type: "LIST"
+    required: false
+    purpose: "Venue labels."
+    options:
+      - { name: "arXiv" }
+      - { name: "NeurIPS" }
+      - { name: "ICML" }
+      - { name: "ICLR" }
+      - { name: "ACL" }
+      - { name: "EMNLP" }
+      - { name: "CVPR" }
+      - { name: "ICCV" }
+      - { name: "ECCV" }
+      - { name: "SIGGRAPH" }
+      - { name: "KDD" }
+      - { name: "WWW" }
+      - { name: "AAAI" }
+      - { name: "IJCAI" }
+      - { name: "Journal" }
+      - { name: "Workshop" }
+      - { name: "Preprint" }
+
+  - name: "Field"
+    frontmatter: "field"
+    type: "LIST"
+    required: false
+    purpose: "Broad research area labels."
+    options:
+      - { name: "Machine Learning" }
+      - { name: "Natural Language Processing" }
+      - { name: "Computer Vision" }
+      - { name: "Robotics" }
+      - { name: "Systems" }
+      - { name: "Theory" }
+      - { name: "HCI" }
+      - { name: "Data" }
+      - { name: "Security" }
+
+  - name: "Type"
+    frontmatter: "type"
+    type: "LIST"
+    required: false
+    purpose: "Paper or contribution type labels."
+    options:
+      - { name: "method" }
+      - { name: "survey" }
+      - { name: "benchmark" }
+      - { name: "dataset" }
+      - { name: "theory" }
+      - { name: "system" }
+      - { name: "empirical" }
+      - { name: "application" }
+
+  - name: "Keywords"
+    frontmatter: "keywords"
+    type: "LIST"
+    required: false
+    purpose: "Paper-specific keywords or topic phrases."
+
+  - name: "Reading Status"
+    frontmatter: "reading_status"
+    type: "SELECT"
+    required: false
+    default: "Read"
+    purpose: "Workflow state."
+    options:
+      - { name: "To Read" }
+      - { name: "Reading" }
+      - { name: "Read" }
+      - { name: "Reviewed" }
+
+  - name: "Read Date"
+    frontmatter: "read_date"
+    type: "DATE"
+    required: false
+    purpose: "Date the report was written or last substantially updated."
+
+  - name: "Rating"
+    frontmatter: "rating"
+    type: "SELECT"
+    required: false
+    purpose: "Reader rating."
+    options:
+      - { name: "1 star" }
+      - { name: "2 stars" }
+      - { name: "3 stars" }
+      - { name: "4 stars" }
+      - { name: "5 stars" }
+
+  - name: "DOI"
+    frontmatter: "doi"
+    type: "URL"
+    required: false
+    purpose: "DOI URL, preferably https://doi.org/..."
+
+  - name: "arXiv"
+    frontmatter: "arxiv"
+    type: "URL"
+    required: false
+    purpose: "arXiv abstract URL."
+
+  - name: "Code"
+    frontmatter: "code"
+    type: "URL"
+    required: false
+    purpose: "Official code or best verified implementation URL."
+
+  - name: "Report Language"
+    frontmatter: "report_language"
+    type: "SELECT"
+    required: true
+    default: "English"
+    purpose: "Report body language."
+    options:
+      - { name: "English" }
+      - { name: "Chinese" }
+      - { name: "Bilingual" }
+
+deduplication:
+  order:
+    - "DOI"
+    - "arXiv"
+    - "Original Title"
+
+optional_extensions:
+  research_flow:
+    description: "Add only when the user asks for daily discovery, conference tracking, scoring, or team workflows."
+    properties:
+      - { name: "Score", frontmatter: "score", type: "NUMBER", purpose: "Composite score for discovery triage." }
+      - { name: "Relevance Score", frontmatter: "relevance_score", type: "NUMBER", purpose: "Interest/category match score." }
+      - { name: "Priority", frontmatter: "priority", type: "SELECT", purpose: "Triage priority." }
+      - { name: "Discovery Source", frontmatter: "discovery_source", type: "SELECT", purpose: "Source used for discovery." }
+      - { name: "Conference Year", frontmatter: "conference_year", type: "NUMBER", purpose: "Conference tracking." }

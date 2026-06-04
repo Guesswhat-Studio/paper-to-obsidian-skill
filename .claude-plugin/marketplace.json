@@ -1,15 +1,15 @@
 {
   "name": "guesswhat-paper-tools",
-  "description": "Paper reading, evidence extraction, and Notion publishing plugins from Guesswhat Studio.",
+  "description": "Paper reading, evidence extraction, and Obsidian publishing plugins from Guesswhat Studio.",
   "owner": {
     "name": "Guesswhat Studio",
     "url": "https://github.com/Guesswhat-Studio"
   },
   "plugins": [
     {
-      "name": "paper-to-notion",
-      "source": "./plugins/paper-to-notion",
-      "description": "Evidence-driven paper reading and Notion publishing workflow for Claude Code."
+      "name": "paper-to-obsidian",
+      "source": "./plugins/paper-to-obsidian",
+      "description": "Evidence-driven paper reading and Obsidian publishing workflow for Claude Code."
     }
   ]
 }

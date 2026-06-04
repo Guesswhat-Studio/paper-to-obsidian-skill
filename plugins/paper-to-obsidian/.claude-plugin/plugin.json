@@ -1,0 +1,19 @@
+{
+  "name": "paper-to-obsidian",
+  "version": "0.1.1",
+  "description": "Read academic papers with source-grounded evidence and publish rich reports to an Obsidian vault.",
+  "author": {
+    "name": "Guesswhat Studio",
+    "url": "https://github.com/Guesswhat-Studio"
+  },
+  "homepage": "https://github.com/Guesswhat-Studio/paper-to-obsidian-skill",
+  "repository": "https://github.com/Guesswhat-Studio/paper-to-obsidian-skill",
+  "license": "MIT",
+  "keywords": [
+    "papers",
+    "obsidian",
+    "research",
+    "arxiv",
+    "pdf"
+  ]
+}

@@ -10,8 +10,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLUGIN_ROOT = ROOT / "plugins" / "paper-to-notion"
-PLUGIN_SKILL = PLUGIN_ROOT / "skills" / "paper-to-notion-skill"
+PLUGIN_ROOT = ROOT / "plugins" / "paper-to-obsidian"
+PLUGIN_SKILL = PLUGIN_ROOT / "skills" / "paper-to-obsidian-skill"
 
 
 def rel(path: Path) -> str:
@@ -60,16 +60,16 @@ def validate_manifests(errors: list[str]) -> None:
     if not isinstance(plugins, list) or not plugins:
         errors.append(".claude-plugin/marketplace.json must list at least one plugin")
     else:
-        paper_plugin = next((item for item in plugins if isinstance(item, dict) and item.get("name") == "paper-to-notion"), None)
+        paper_plugin = next((item for item in plugins if isinstance(item, dict) and item.get("name") == "paper-to-obsidian"), None)
         if paper_plugin is None:
-            errors.append("Marketplace must include paper-to-notion")
-        elif paper_plugin.get("source") != "./plugins/paper-to-notion":
-            errors.append("paper-to-notion marketplace source must be ./plugins/paper-to-notion")
+            errors.append("Marketplace must include paper-to-obsidian")
+        elif paper_plugin.get("source") != "./plugins/paper-to-obsidian":
+            errors.append("paper-to-obsidian marketplace source must be ./plugins/paper-to-obsidian")
 
-    if plugin.get("name") != "paper-to-notion":
-        errors.append("plugins/paper-to-notion/.claude-plugin/plugin.json name must be paper-to-notion")
+    if plugin.get("name") != "paper-to-obsidian":
+        errors.append("plugins/paper-to-obsidian/.claude-plugin/plugin.json name must be paper-to-obsidian")
     if plugin.get("license") != "MIT":
-        errors.append("plugins/paper-to-notion/.claude-plugin/plugin.json license must be MIT")
+        errors.append("plugins/paper-to-obsidian/.claude-plugin/plugin.json license must be MIT")
 
 
 def validate_mirrors(errors: list[str]) -> None:
@@ -77,7 +77,7 @@ def validate_mirrors(errors: list[str]) -> None:
     assert_same(ROOT / "SKILL.md", PLUGIN_SKILL / "SKILL.md", errors)
     assert_same(ROOT / "requirements.txt", PLUGIN_SKILL / "requirements.txt", errors)
     assert_same(ROOT / "agents" / "openai.yaml", PLUGIN_SKILL / "agents" / "openai.yaml", errors)
-    assert_same(ROOT / "config" / "notion_schema.yaml", PLUGIN_SKILL / "config" / "notion_schema.yaml", errors)
+    assert_same(ROOT / "config" / "obsidian_schema.yaml", PLUGIN_SKILL / "config" / "obsidian_schema.yaml", errors)
 
     for path in sorted((ROOT / "references").glob("*.md")):
         assert_same(path, PLUGIN_SKILL / "references" / path.name, errors)
@@ -123,13 +123,22 @@ def validate_arxiv_asset_resolution(errors: list[str]) -> None:
         module = importlib.util.module_from_spec(spec)
         sys.modules[spec.name] = module
         spec.loader.exec_module(module)
-        resolved = module.resolve_asset_url(
-            "https://arxiv.org/html/2503.14232",
-            "extracted/6458440/images/fig1-min.png",
-        )
-        expected = "https://arxiv.org/html/2503.14232/extracted/6458440/images/fig1-min.png"
-        if resolved != expected:
-            errors.append(f"arXiv asset URL resolution regressed: expected {expected}, got {resolved}")
+        cases = [
+            (
+                "https://arxiv.org/html/2503.14232",
+                "extracted/6458440/images/fig1-min.png",
+                "https://arxiv.org/html/2503.14232/extracted/6458440/images/fig1-min.png",
+            ),
+            (
+                "https://arxiv.org/html/2605.29582",
+                "2605.29582v1/x1.png",
+                "https://arxiv.org/html/2605.29582v1/x1.png",
+            ),
+        ]
+        for base_url, src, expected in cases:
+            resolved = module.resolve_asset_url(base_url, src)
+            if resolved != expected:
+                errors.append(f"arXiv asset URL resolution regressed: expected {expected}, got {resolved}")
     except Exception as exc:  # noqa: BLE001 - report validation failure with context.
         errors.append(f"arXiv asset URL validation failed: {exc}")
 
